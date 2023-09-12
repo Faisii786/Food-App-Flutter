@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/screens/home.dart';
-import 'package:food_app/screens/login_screen.dart';
+import 'package:food_app/credentials/login_screen.dart';
 
 class SplashServices {
   void islogin(BuildContext context) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/screens/splash_servives.dart';
+import 'package:food_app/splash/splash_servives.dart';
 import 'package:google_fonts/google_fonts.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

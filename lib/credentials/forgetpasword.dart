@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/screens/login_screen.dart';
+import 'package:food_app/credentials/login_screen.dart';
 import 'package:food_app/widgets/my_textfield.dart';
 import 'package:food_app/widgets/round_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';

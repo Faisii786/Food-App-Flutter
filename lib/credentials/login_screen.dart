@@ -2,9 +2,9 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:food_app/screens/forgetpasword.dart';
+import 'package:food_app/credentials/forgetpasword.dart';
 import 'package:food_app/screens/home.dart';
-import 'package:food_app/screens/signup_screen.dart';
+import 'package:food_app/credentials/signup_screen.dart';
 import 'package:food_app/widgets/my_password_textfield.dart';
 import 'package:food_app/widgets/my_textfield.dart';
 import 'package:food_app/widgets/round_button.dart';
@@ -149,9 +149,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           Column(
                             children: [
                               MyTextField(
+                                
                                 hintText: 'Enter your Email',
                                 controller: emailController,
                                 obsecureText: false,
+                              
                               ),
                               const SizedBox(
                                 height: 20,
