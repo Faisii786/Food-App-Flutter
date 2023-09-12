@@ -149,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Column(
                             children: [
                               MyTextField(
-                                hintText: 'Enter your email',
+                                hintText: 'Enter your Email',
                                 controller: emailController,
                                 obsecureText: false,
                               ),
@@ -174,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: Text(
                                     'Forgot Password?',
                                     style: GoogleFonts.aladin(
-                                        color: buttoncolor, fontSize: 20),
+                                        color: Colors.red, fontSize: 20),
                                   ),
                                 ),
                               ),
@@ -192,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "didn't have an account?",
+                                    "Didn't have an account ?",
                                     style: GoogleFonts.aladin(
                                         color: Colors.black, fontSize: 18),
                                   ),
@@ -207,7 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       child: Text(
                                         'Register',
                                         style: GoogleFonts.aladin(
-                                            fontSize: 20, color: buttoncolor),
+                                            fontSize: 20, color: Colors.cyan),
                                       )),
                                 ],
                               ),

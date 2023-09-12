@@ -4,7 +4,9 @@ class Categories extends StatelessWidget {
   final String image;
   final VoidCallback ontap;
   final String name;
-   const Categories({Key? key,required this.image,required this.name,required this.ontap}) : super(key: key);
+  const Categories(
+      {Key? key, required this.image, required this.name, required this.ontap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +19,21 @@ class Categories extends StatelessWidget {
             height: 60,
             width: 60,
             decoration: BoxDecoration(
-              image: DecorationImage(image: NetworkImage(image),fit: BoxFit.cover),
+              image: DecorationImage(
+                  image: NetworkImage(image), fit: BoxFit.fitHeight),
               color: Colors.grey,
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          const SizedBox(height: 10,),
-          Text(name,
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            name,
             style: const TextStyle(
               color: Colors.white,
-            ),)
+            ),
+          )
         ],
       ),
     );

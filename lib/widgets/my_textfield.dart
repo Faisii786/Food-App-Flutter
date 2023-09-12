@@ -12,6 +12,7 @@ class MyTextField extends StatelessWidget {
       obscureText: obsecureText,
       controller: controller,
       decoration:  InputDecoration(
+        prefixIcon: const Icon(Icons.email),
         border: OutlineInputBorder(
           borderSide:const  BorderSide(
             style: BorderStyle.solid

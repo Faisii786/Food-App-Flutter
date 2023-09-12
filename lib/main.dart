@@ -7,12 +7,11 @@ import 'package:food_app/provider/my_provider.dart';
 import 'package:food_app/screens/cart_page.dart';
 import 'package:food_app/screens/detail_screen.dart';
 import 'package:food_app/screens/home.dart';
-import 'package:food_app/screens/login_screen.dart';
-import 'package:food_app/screens/splash_screen.dart';
+import 'package:food_app/credentials/login_screen.dart';
+import 'package:food_app/splash/splash_screen.dart';
 import 'package:food_app/widgets/my_password_textfield.dart';
 import 'package:food_app/widgets/round_button.dart';
 import 'package:provider/provider.dart';
-import 'color/color.dart';
 
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
