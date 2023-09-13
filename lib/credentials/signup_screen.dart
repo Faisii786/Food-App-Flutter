@@ -166,11 +166,13 @@ class _SignupScreenState extends State<SignupScreen> {
                                 hintText: 'Enter your first Name',
                                 controller: firstName,
                                 obsecureText: false,
+                                prefixIcon: Icon(Icons.person),
                               ),
                               const SizedBox(
                                 height: 20,
                               ),
                               MyTextField(
+                                prefixIcon: Icon(Icons.person),
                                   obsecureText: false,
                                   hintText: 'enter your last name',
                                   controller: lastName),
@@ -178,6 +180,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 height: 20,
                               ),
                               MyTextField(
+                                prefixIcon: Icon(Icons.person),
                                 controller: emailController,
                                 obsecureText: false,
                                 hintText: 'enter your email',
@@ -187,6 +190,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 height: 20,
                               ),
                               MyTextField(
+                                prefixIcon: Icon(Icons.person),
                                 hintText: 'Enter your password',
                                 controller: passwordController,
                                 obsecureText: true,

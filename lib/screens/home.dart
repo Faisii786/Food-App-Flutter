@@ -282,10 +282,10 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                   ListTile(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const CartPage()));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => const CartPage()));
                     },
                     leading: const Icon(
                       Icons.shopping_cart,

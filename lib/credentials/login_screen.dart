@@ -149,11 +149,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           Column(
                             children: [
                               MyTextField(
-                                
+                                prefixIcon: Icon(Icons.person),
                                 hintText: 'Enter your Email',
                                 controller: emailController,
                                 obsecureText: false,
-                              
                               ),
                               const SizedBox(
                                 height: 20,

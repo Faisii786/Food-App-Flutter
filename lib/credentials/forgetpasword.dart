@@ -103,6 +103,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   hintText: 'Enter your email',
                   controller: emailController,
                   obsecureText: false,
+                  prefixIcon: "",
                 ),
                 const SizedBox(
                   height: 20,

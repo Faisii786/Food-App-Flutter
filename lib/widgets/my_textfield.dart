@@ -2,8 +2,9 @@ import'package:flutter/material.dart';
 class MyTextField extends StatelessWidget {
   final String hintText;
   final bool obsecureText;
+  final prefixIcon;
   final TextEditingController controller;
-  const MyTextField({Key? key,required this.hintText,this.obsecureText=true,required this.controller}) : super(key: key);
+  const MyTextField({Key? key,required this.hintText,this.obsecureText=true,required this.controller,required this.prefixIcon,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class MyTextField extends StatelessWidget {
       obscureText: obsecureText,
       controller: controller,
       decoration:  InputDecoration(
-        prefixIcon: const Icon(Icons.email),
+        prefixIcon: prefixIcon,
         border: OutlineInputBorder(
           borderSide:const  BorderSide(
             style: BorderStyle.solid

@@ -138,40 +138,53 @@ class _DetailScreenState extends State<DetailScreen> {
                       const SizedBox(
                         height: 15,
                       ),
-                      Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFBCD438),
-                          borderRadius: BorderRadius.circular(18),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const CartPage()));
-                                  provider.addToCart(
-                                      image: widget.image,
-                                      quantity: quantity,
-                                      price: widget.price,
-                                      name: widget.name);
-                                },
-                                icon: const Icon(
-                                  Icons.shopping_cart,
-                                  color: Colors.black,
-                                )),
-                            Text(
-                              'Add to cart',
-                              style: GoogleFonts.aladin(
-                                color: Colors.black,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ],
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const placeOrder()));
+                        },
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFBCD438),
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Place Order',
+                                style: GoogleFonts.aladin(
+                                    color: Colors.black, fontSize: 21),
+                              )
+                              // IconButton(
+                              //     onPressed: () {
+                              //       Navigator.push(
+                              //           context,
+                              //           MaterialPageRoute(
+                              //               builder: (context) =>
+                              //                   const placeOrder()));
+                              // provider.addToCart(
+                              //     image: widget.image,
+                              //     quantity: quantity,
+                              //     price: widget.price,
+                              //     name: widget.name);
+                              // },
+                              // icon: const Icon(
+                              //   Icons.shop_2_outlined,
+                              //   color: Colors.black,
+                              // )),
+                              // Text(
+                              //   'Place Order',
+                              //   style: GoogleFonts.aladin(
+                              //     color: Colors.black,
+                              //     fontSize: 20,
+                              //   ),
+                              // ),
+                            ],
+                          ),
                         ),
                       )
                     ],
