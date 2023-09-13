@@ -81,6 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
         loading = false;
       });
     }
+
+    
     setState(() {
       loading = false;
     });
@@ -123,18 +125,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        'sign in to your account',
+                        "Didn't have an account ? Register",
                         style: GoogleFonts.aladin(
-                          color: Colors.white,
+                          color: const Color.fromARGB(255, 228, 226, 226),
                           fontSize: 20,
                         ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
                 Expanded(
-                    child: Container(
+                  child: Container(
                   color: Colors.white,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -144,12 +146,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const SizedBox(
-                            height: 60,
+                            height: 40,
                           ),
                           Column(
                             children: [
                               MyTextField(
-                                prefixIcon: Icon(Icons.person),
+                                prefixIcon: const Icon(Icons.person),
                                 hintText: 'Enter your Email',
                                 controller: emailController,
                                 obsecureText: false,
@@ -174,8 +176,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   alignment: Alignment.bottomRight,
                                   child: Text(
                                     'Forgot Password?',
-                                    style: GoogleFonts.aladin(
-                                        color: Colors.red, fontSize: 20),
+                                    style: GoogleFonts.alatsi(
+                                        color: Colors.red, fontSize: 16),
                                   ),
                                 ),
                               ),
@@ -189,29 +191,52 @@ class _LoginScreenState extends State<LoginScreen> {
                                   validation1();
                                 },
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Column(
                                 children: [
-                                  Text(
-                                    "Didn't have an account ?",
-                                    style: GoogleFonts.aladin(
-                                        color: Colors.black, fontSize: 18),
+                                  const Text(
+                                    "------------ or ------------",
+                                    style: TextStyle(fontSize: 17),
                                   ),
-                                  TextButton(
-                                      onPressed: () {
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  RoundButton(
+                                      ontap: () {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     const SignupScreen()));
                                       },
-                                      child: Text(
-                                        'Register',
-                                        style: GoogleFonts.aladin(
-                                            fontSize: 20, color: Colors.cyan),
-                                      )),
+                                      title: 'Register')
                                 ],
-                              ),
+                              )
+                              // Row(s
+                              //   mainAxisAlignment: MainAxisAlignment.center,
+                              //   children: [
+                              //     Text(
+                              //       "Didn't have an account ?",
+                              //       style: GoogleFonts.aladin(
+                              //           color: Colors.black, fontSize: 18),
+                              //     ),
+                              //     TextButton(
+                              //         onPressed: () {
+                              //           Navigator.push(
+                              //               context,
+                              //               MaterialPageRoute(
+                              //                   builder: (context) =>
+                              //                       const SignupScreen()));
+                              //         },
+                              //         child: Text(
+                              //           'Register',
+                              //           style: GoogleFonts.aladin(
+                              //               fontSize: 20, color: Colors.cyan),
+                              //         )),
+                              //   ],
+                              // ),
                             ],
                           )
                         ],

@@ -74,47 +74,62 @@ class _ForgetPasswordState extends State<ForgetPassword> {
       key: globalkey,
       child: Scaffold(
         appBar: AppBar(
-          leading: InkWell(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()));
-            },
-            child: const Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
-          ),
+          iconTheme: const IconThemeData(color: Colors.white),
           elevation: 0.0,
-          toolbarHeight: 100,
+          toolbarHeight: 80,
           title: const Text(
             'Forget Password',
             style: TextStyle(fontSize: 20, color: Colors.white),
           ),
-          backgroundColor: const Color(0xFF0b2d39),
+          //backgroundColor: const Color(0xFF0b2d39),
+          backgroundColor: const Color.fromARGB(255, 41, 5, 104),
           centerTitle: true,
         ),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                MyTextField(
-                  hintText: 'Enter your email',
-                  controller: emailController,
-                  obsecureText: false,
-                  prefixIcon: "",
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Container(
+            height: 500,
+            decoration: const BoxDecoration(
+                // border: Border.all(),
+                // borderRadius: BorderRadius.circular(10)
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                RoundButton(
-                    loading: loading,
-                    ontap: () {
-                      ResetPassword();
-                    },
-                    title: 'Forget Password'),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'images/forget.png',
+                    width: 100,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    "Reset Password",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.justify,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  MyTextField(
+                    hintText: 'Enter your email',
+                    controller: emailController,
+                    obsecureText: false,
+                    prefixIcon: const Icon(Icons.email),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  RoundButton(
+                      loading: loading,
+                      ontap: () {
+                        ResetPassword();
+                      },
+                      title: 'Forget Password'),
+                ],
+              ),
             ),
           ),
         ),

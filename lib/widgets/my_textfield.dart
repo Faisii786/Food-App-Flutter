@@ -9,11 +9,11 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      cursorColor: Color(0xFFBCD438),
+      cursorColor: const Color(0xFFBCD438),
       obscureText: obsecureText,
       controller: controller,
       decoration:  InputDecoration(
-        prefixIcon: prefixIcon,
+       prefixIcon: prefixIcon,
         border: OutlineInputBorder(
           borderSide:const  BorderSide(
             style: BorderStyle.solid

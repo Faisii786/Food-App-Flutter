@@ -4,11 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/provider/my_provider.dart';
-import 'package:food_app/screens/cart_page.dart';
+import 'package:food_app/screens/order.dart';
 import 'package:food_app/screens/detail_screen.dart';
 import 'package:food_app/screens/home.dart';
 import 'package:food_app/credentials/login_screen.dart';
 import 'package:food_app/splash/splash_screen.dart';
+import 'package:food_app/widgets/carousal_slider.dart';
 import 'package:food_app/widgets/my_password_textfield.dart';
 import 'package:food_app/widgets/round_button.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
           primaryColor: const Color(0xFFBCD438),
         ),
         home:const SplashScreen(),
+        //home: SliderP(),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/provider/my_provider.dart';
-import 'package:food_app/screens/cart_page.dart';
+import 'package:food_app/screens/order.dart';
 import 'package:food_app/screens/home.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -143,7 +143,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const placeOrder()));
+                                  builder: (context) => const PlaceOrder()));
                         },
                         child: Container(
                           height: 50,

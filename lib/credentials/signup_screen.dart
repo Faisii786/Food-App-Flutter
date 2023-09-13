@@ -166,7 +166,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 hintText: 'Enter your first Name',
                                 controller: firstName,
                                 obsecureText: false,
-                                prefixIcon: Icon(Icons.person),
+                                prefixIcon: const Icon(Icons.person),
                               ),
                               const SizedBox(
                                 height: 20,

@@ -6,23 +6,23 @@ import 'package:food_app/screens/ordersucessfullpage.dart';
 import 'package:food_app/widgets/my_textfield.dart';
 import 'package:food_app/widgets/round_button.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:food_app/screens/ordersucessfullpage.dart';
 
-class placeOrder extends StatefulWidget {
-  const placeOrder({Key? key}) : super(key: key);
-  static Pattern pattern =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+class PlaceOrder extends StatefulWidget {
+  const PlaceOrder({Key? key}) : super(key: key);
+  // static Pattern pattern =
+  //     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
   @override
-  State<placeOrder> createState() => _placeOrderState();
+  State<PlaceOrder> createState() => _PlaceOrderState();
 }
 
-class _placeOrderState extends State<placeOrder> {
-  RegExp reg = RegExp(placeOrder.pattern.toString());
+class _PlaceOrderState extends State<PlaceOrder> {
+  //RegExp reg = RegExp(placeOrder.pattern.toString());
   Color whatsappBusinessColor = const Color(0xFF0b2d39);
   Color buttoncolor = const Color(0xFFBCD438);
   final namecontroller = TextEditingController();
   final phonecontroller = TextEditingController();
+  final citycontroller = TextEditingController();
   final adresscontroller = TextEditingController();
   final emailController = TextEditingController();
   final auth = FirebaseAuth.instance;
@@ -30,62 +30,78 @@ class _placeOrderState extends State<placeOrder> {
   GlobalKey<ScaffoldMessengerState> globalkey =
       GlobalKey<ScaffoldMessengerState>();
   void validation1() {
-    if (namecontroller.text.trim().isEmpty || emailController.text == null) {
+    if (namecontroller.text.trim().isEmpty || namecontroller.text == null) {
       showSnackbar('Name is required');
       return;
     }
-    if (phonecontroller.text.trim().isEmpty || emailController.text == null) {
+    if (phonecontroller.text.trim().isEmpty || phonecontroller.text == null) {
       showSnackbar('Phone number is required');
       return;
     }
-    if (adresscontroller.text.trim().isEmpty || emailController.text == null) {
+    if (citycontroller.text.trim().isEmpty || citycontroller.text == null) {
+      showSnackbar('City is required');
+      return;
+    }
+    if (adresscontroller.text.trim().isEmpty || adresscontroller.text == null) {
       showSnackbar('Adress is required');
       return;
     }
-    if (emailController.text.trim().isEmpty || emailController.text == null) {
-      showSnackbar('Email is empty');
-      return;
-    } else if (!reg.hasMatch(emailController.text)) {
-      showSnackbar('Please enter valid email');
-      return;
-    } else {
+    // if (emailController.text.trim().isEmpty || emailController.text == null) {
+    //   showSnackbar('Email is empty');
+    //   return;
+    // } else if (!reg.hasMatch(emailController.text)) {
+    //   showSnackbar('Please enter valid email');
+    //   return;
+    // }
+    else {
       setState(() {
         loading = true;
       });
-      login();
+      String username = namecontroller.text;
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => OrderSucessfull(username)));
     }
   }
 
-  Future login() async {
-    setState(() {
-      loading = true;
-    });
-    try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: emailController.text)
-          .then((value) {
-        String username = namecontroller.text;
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => OrderSucessfull(username)));
-      });
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        showSnackbar('Please use registered email');
-        setState(() {
-          loading = false;
-        });
-        return;
-      }
-    } catch (e) {
-      showSnackbar(e.toString());
-      setState(() {
-        loading = false;
-      });
-    }
-    setState(() {
-      loading = false;
-    });
+  @override
+  void dispose() {
+    super.dispose();
+    namecontroller.dispose();
+    phonecontroller.dispose();
+    citycontroller.dispose();
+    adresscontroller.dispose();
   }
+
+  // Future login() async {
+  //   setState(() {
+  //     loading = true;
+  //   });
+  //   try {
+  //     await FirebaseAuth.instance
+  //         .sendPasswordResetEmail(email: emailController.text)
+  //         .then((value) {
+  //       String username = namecontroller.text;
+  //       Navigator.push(context,
+  //           MaterialPageRoute(builder: (context) => OrderSucessfull(username)));
+  //     });
+  //   } on FirebaseAuthException catch (e) {
+  //     if (e.code == 'user-not-found') {
+  //       showSnackbar('Please use registered email');
+  //       setState(() {
+  //         loading = false;
+  //       });
+  //       return;
+  //     }
+  //   } catch (e) {
+  //     showSnackbar(e.toString());
+  //     setState(() {
+  //       loading = false;
+  //     });
+  //   }
+  //   setState(() {
+  //     loading = false;
+  //   });
+  // }
 
   void showSnackbar(String message) {
     final snackbar = SnackBar(
@@ -165,19 +181,28 @@ class _placeOrderState extends State<placeOrder> {
                             ),
                             MyTextField(
                               prefixIcon: const Icon(Icons.location_city),
-                              hintText: 'Enter your Adress',
-                              controller: adresscontroller,
+                              hintText: 'Enter your City',
+                              controller: citycontroller,
                               obsecureText: false,
                             ),
                             const SizedBox(
                               height: 20,
                             ),
                             MyTextField(
-                              prefixIcon: const Icon(Icons.email),
-                              hintText: 'Enter your Email',
-                              controller: emailController,
+                              prefixIcon: const Icon(Icons.location_city),
+                              hintText: 'Enter full Adress',
+                              controller: adresscontroller,
                               obsecureText: false,
                             ),
+                            // const SizedBox(
+                            //   height: 20,
+                            // ),
+                            // MyTextField(
+                            //   prefixIcon: const Icon(Icons.email),
+                            //   hintText: 'Enter your Email',
+                            //   controller: emailController,
+                            //   obsecureText: false,
+                            // ),
                             const SizedBox(
                               height: 20,
                             ),
@@ -202,9 +227,6 @@ class _placeOrderState extends State<placeOrder> {
     );
   }
 }
-
-
-
 
 // // ignore_for_file: override_on_non_overriding_member
 
