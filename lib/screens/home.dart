@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/models/food_model.dart';
@@ -9,7 +8,6 @@ import 'package:food_app/credentials/login_screen.dart';
 import 'package:food_app/widgets/Categories.dart';
 import 'package:food_app/widgets/my_container.dart';
 import 'package:provider/provider.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../models/categories_model.dart';
 import '../models/food_categories_model.dart';
 
@@ -20,9 +18,9 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
-  List<CategoriesModel> burger = [];
+  List<CategoriesModel> Burger = [];
   final auth = FirebaseAuth.instance;
-  List<CategoriesModel> recipe = [];
+  List<CategoriesModel> Recipe = [];
   List<CategoriesModel> bbq = [];
   List<CategoriesModel> biryanil = [];
   List<CategoriesModel> karahi = [];
@@ -34,7 +32,7 @@ class _HomescreenState extends State<Homescreen> {
   List<FoodCategoriesModel> karahiCategories = [];
   Widget recipes() {
     return Row(
-      children: recipe
+      children: Recipe
           .map((e) => Categories(
               ontap: () {
                 Navigator.pushReplacement(
@@ -49,9 +47,9 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 
-  Widget burgers() {
+  Widget Burgers() {
     return Row(
-        children: burger
+        children: Burger
             .map((e) => Categories(
                 ontap: () {
                   Navigator.pushReplacement(
@@ -68,7 +66,7 @@ class _HomescreenState extends State<Homescreen> {
             .toList());
   }
 
-  Widget bbqs() {
+  Widget BBQS() {
     return Row(
       children: bbq
           .map((e) => Categories(
@@ -85,7 +83,7 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 
-  Widget biryani() {
+  Widget Biryani() {
     return Row(
       children: biryanil
           .map((e) => Categories(
@@ -102,7 +100,7 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 
-  Widget karahii() {
+  Widget Chicken() {
     return Row(
       children: karahi
           .map((e) => Categories(
@@ -161,10 +159,10 @@ class _HomescreenState extends State<Homescreen> {
     //burger list
     provider.getBurgerCategories();
     // burger=provider.burgerList;
-    burger = provider.throwburgerlist;
+    Burger = provider.throwburgerlist;
     //Recipe
     provider.getRecipes();
-    recipe = provider.throwrecipeList;
+    Recipe = provider.throwrecipeList;
     // recipe=provider.recipeList;
     //bbq
     provider.getbbqCategories();
@@ -378,11 +376,11 @@ class _HomescreenState extends State<Homescreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
                         children: [
-                          burgers(),
+                          Burgers(),
                           recipes(),
-                          bbqs(),
-                          biryani(),
-                          karahii(),
+                          BBQS(),
+                          Biryani(),
+                          Chicken(),
                         ],
                       ),
                     ),

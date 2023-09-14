@@ -82,7 +82,6 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     }
 
-    
     setState(() {
       loading = false;
     });
@@ -136,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 20),
                 Expanded(
-                  child: Container(
+                    child: Container(
                   color: Colors.white,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -146,8 +145,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const SizedBox(
-                            height: 40,
+                            height: 60,
                           ),
+                      
                           Column(
                             children: [
                               MyTextField(

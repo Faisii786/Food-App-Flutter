@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/provider/my_provider.dart';
-import 'package:food_app/screens/order.dart';
+import 'package:food_app/order.dart/order.dart';
 import 'package:food_app/screens/home.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -42,10 +42,10 @@ class _DetailScreenState extends State<DetailScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Expanded(
-              child: CircleAvatar(
-            radius: 100,
-            backgroundImage: NetworkImage(widget.image),
-          )),
+               child: Image(image: NetworkImage(widget.image),)
+          //   radius: 100,
+          //   backgroundImage: NetworkImage(widget.image),
+           ),
           Expanded(
               flex: 2,
               child: Container(
@@ -63,10 +63,16 @@ class _DetailScreenState extends State<DetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(
+                        height: 10,
+                      ),
                       Text(
                         widget.name,
                         style:
                             const TextStyle(color: Colors.white, fontSize: 25),
+                      ),
+                      SizedBox(
+                        height: 10,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -127,6 +133,9 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       const Text(
                         'Description',
                         style: TextStyle(color: Colors.white, fontSize: 30),
@@ -136,7 +145,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
                       const SizedBox(
-                        height: 15,
+                        height: 25,
                       ),
                       InkWell(
                         onTap: () {

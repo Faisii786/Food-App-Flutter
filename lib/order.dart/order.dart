@@ -2,7 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:food_app/screens/ordersucessfullpage.dart';
+import 'package:food_app/order.dart/ordersucessfullpage.dart';
 import 'package:food_app/widgets/my_textfield.dart';
 import 'package:food_app/widgets/round_button.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -54,12 +54,18 @@ class _PlaceOrderState extends State<PlaceOrder> {
     //   return;
     // }
     else {
+      String username = namecontroller.text;
+      int phone = int.parse(phonecontroller.text);
+      String city = citycontroller.text;
+      String adress = adresscontroller.text;
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  OrderSucessfull(username, phone, city, adress)));
       setState(() {
         loading = true;
       });
-      String username = namecontroller.text;
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => OrderSucessfull(username)));
     }
   }
 
