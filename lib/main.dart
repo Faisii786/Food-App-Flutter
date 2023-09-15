@@ -1,24 +1,15 @@
-// ignore_for_file: unused_import
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:food_app/provider/my_provider.dart';
-import 'package:food_app/order.dart/order.dart';
-import 'package:food_app/screens/detail_screen.dart';
-import 'package:food_app/screens/home.dart';
-import 'package:food_app/credentials/login_screen.dart';
 import 'package:food_app/splash/splash_screen.dart';
-import 'package:food_app/slider.dart/carousal_slider.dart';
-import 'package:food_app/widgets/my_password_textfield.dart';
-import 'package:food_app/widgets/round_button.dart';
 import 'package:provider/provider.dart';
 
-Future main() async{
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -35,10 +26,9 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           primaryColor: const Color(0xFFBCD438),
         ),
-        home:const SplashScreen(),
+        home: const SplashScreen(),
         //home: SliderP(),
       ),
     );
   }
 }
-

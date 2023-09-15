@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/models/food_model.dart';
 import 'package:food_app/provider/my_provider.dart';
+import 'package:food_app/slider.dart/carousal_slider.dart';
 import 'package:food_app/screens/categories_details.dart';
 import 'package:food_app/screens/detail_screen.dart';
 import 'package:food_app/credentials/login_screen.dart';
@@ -32,38 +33,34 @@ class _HomescreenState extends State<Homescreen> {
   List<FoodCategoriesModel> karahiCategories = [];
   Widget recipes() {
     return Row(
-      children: Recipe
-          .map((e) => Categories(
-              ontap: () {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            CategoriesDetails(list: recipeCategories)));
-              },
-              image: e.image,
-              name: e.name))
-          .toList(),
+      children: Recipe.map((e) => Categories(
+          ontap: () {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        CategoriesDetails(list: recipeCategories)));
+          },
+          image: e.image,
+          name: e.name)).toList(),
     );
   }
 
   Widget Burgers() {
     return Row(
-        children: Burger
-            .map((e) => Categories(
-                ontap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CategoriesDetails(
-                        list: burgerCategories,
-                      ),
-                    ),
-                  );
-                },
-                image: e.image,
-                name: e.name))
-            .toList());
+        children: Burger.map((e) => Categories(
+            ontap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CategoriesDetails(
+                    list: burgerCategories,
+                  ),
+                ),
+              );
+            },
+            image: e.image,
+            name: e.name)).toList());
   }
 
   Widget BBQS() {
@@ -218,7 +215,7 @@ class _HomescreenState extends State<Homescreen> {
                             width: 50,
                             color: Colors.white,
                             image: AssetImage(
-                              'images/food.png',
+                              'assets/images/food.png',
                             )),
                         SizedBox(
                           height: 10,
@@ -281,10 +278,10 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                   ListTile(
                     onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => const CartPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CarousalSlider()));
                     },
                     leading: const Icon(
                       Icons.shopping_cart,
@@ -338,89 +335,85 @@ class _HomescreenState extends State<Homescreen> {
                   icon: const Icon(Icons.logout))
             ],
           ),
-          body: GestureDetector(
-            onTap: () {
-              globalKey.currentState?.openEndDrawer();
-            },
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: TextField(
-                      style: const TextStyle(
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: TextField(
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: 'Search',
+                      hintStyle: const TextStyle(color: Colors.white),
+                      prefixIcon: const Icon(
+                        Icons.search,
                         color: Colors.white,
                       ),
-                      decoration: InputDecoration(
-                        hintText: 'Search',
-                        hintStyle: const TextStyle(color: Colors.white),
-                        prefixIcon: const Icon(
-                          Icons.search,
-                          color: Colors.white,
-                        ),
-                        filled: true,
-                        fillColor: const Color(0xff3a3e3e),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                      filled: true,
+                      fillColor: const Color(0xff3a3e3e),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Row(
-                        children: [
-                          Burgers(),
-                          recipes(),
-                          BBQS(),
-                          Biryani(),
-                          Chicken(),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
+                ),
+                //CarousalSlider(),
+                const SizedBox(
+                  height: 10,
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: SizedBox(
-                      height: 505,
-                      child: GridView.count(
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.8,
-                        crossAxisSpacing: 20,
-                        mainAxisSpacing: 20,
-                        shrinkWrap: false,
-                        primary: false,
-                        children: foodlist
-                            .map((e) => MyContainer(
-                                  image: e.image,
-                                  price: e.price,
-                                  name: e.name,
-                                  ontap: () {
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => DetailScreen(
-                                                  name: e.name,
-                                                  price: e.price,
-                                                  image: e.image,
-                                                )));
-                                  },
-                                ))
-                            .toList(),
-                      ),
+                    child: Row(
+                      children: [
+                        Burgers(),
+                        recipes(),
+                        BBQS(),
+                        Biryani(),
+                        Chicken(),
+                      ],
                     ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: SizedBox(
+                    height: 505,
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.8,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                      shrinkWrap: false,
+                      primary: false,
+                      children: foodlist
+                          .map((e) => MyContainer(
+                                image: e.image,
+                                price: e.price,
+                                name: e.name,
+                                ontap: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DetailScreen(
+                                                name: e.name,
+                                                price: e.price,
+                                                image: e.image,
+                                              )));
+                                },
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                )
+              ],
             ),
           )),
     );

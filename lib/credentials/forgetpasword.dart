@@ -99,7 +99,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'images/forget.png',
+                    'assets/images/forget.png',
                     width: 100,
                   ),
                   const SizedBox(
