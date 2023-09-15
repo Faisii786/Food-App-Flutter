@@ -13,7 +13,9 @@ import '../models/categories_model.dart';
 import '../models/food_categories_model.dart';
 
 class Homescreen extends StatefulWidget {
-  const Homescreen({Key? key}) : super(key: key);
+  const Homescreen({
+    Key? key,
+  }) : super(key: key);
   @override
   State<Homescreen> createState() => _HomescreenState();
 }
@@ -195,7 +197,7 @@ class _HomescreenState extends State<Homescreen> {
     ///karahi Categories///
     provider.getKarahiCategoriesList();
     karahiCategories = provider.throwKarahiCatList;
-    GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
+    //GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
     return WillPopScope(
       onWillPop: () async {
         return false;

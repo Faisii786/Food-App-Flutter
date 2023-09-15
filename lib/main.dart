@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           primaryColor: const Color(0xFFBCD438),
         ),
-        home: const SplashScreen(),
-        //home: SliderP(),
+        //home: const SplashScreen(),
+        home: SplashScreen(),
       ),
     );
   }
