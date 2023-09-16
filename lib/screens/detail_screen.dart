@@ -31,7 +31,7 @@ class _DetailScreenState extends State<DetailScreen> {
         leading: IconButton(
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Homescreen()));
+                MaterialPageRoute(builder: (context) => Homescreen()));
           },
           icon: const Icon(
             Icons.arrow_back,
