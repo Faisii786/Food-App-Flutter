@@ -26,7 +26,7 @@ class MyContainer extends StatelessWidget {
         ),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 13,
             ),
             CircleAvatar(

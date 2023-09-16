@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,10 @@ import 'package:food_app/widgets/my_container.dart';
 import 'package:provider/provider.dart';
 import '../models/categories_model.dart';
 import '../models/food_categories_model.dart';
+// import '../slider/carousal_slider.dart';
 import 'cart.dart';
+// import 'package:carousel_slider/carousel_controller.dart';
+// import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({Key? key}) : super(key: key);
@@ -20,6 +24,29 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
+
+  // for carousal slider
+  final urlImages = [
+    'https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+    'https://images.unsplash.com/photo-1586816001966-79b736744398?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+    'https://plus.unsplash.com/premium_photo-1694141252026-3df1de888a21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80',
+    'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+    'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+  ];
+
+  int activeIndex = 0;
+  final CarouselController carouselController = CarouselController();
+
+  // Widget buildIndicator() => AnimatedSmoothIndicator(
+  //       onDotClicked: animateToSlide,
+  //       effect: const ExpandingDotsEffect(
+  //           dotWidth: 15, activeDotColor: Colors.blue),
+  //       activeIndex: activeIndex,
+  //       count: urlImages.length,
+  //     );
+
+  // void animateToSlide(int index) => carouselController.animateToPage(index);
+
   final auth = FirebaseAuth.instance;
   List<CategoriesModel> Burger = [];
   List<CategoriesModel> Recipe = [];
@@ -33,6 +60,7 @@ class _HomescreenState extends State<Homescreen> {
   List<FoodCategoriesModel> biryaniCategories = [];
   List<FoodCategoriesModel> karahiCategories = [];
 
+  // for searching purpose
   TextEditingController searchController = TextEditingController();
 
   Widget recipes() {
@@ -118,7 +146,7 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 
-  // Step 2: Function to filter food list based on search input
+  //Function to filter food list based on search input
   List<FoodModel> filteredFoodList = [];
 
   void filterFoodList(String query) {
@@ -225,6 +253,9 @@ class _HomescreenState extends State<Homescreen> {
       return {};
     }
 
+    Widget buildImage(String urlImage, int index) => Image.network(
+          urlImage, /*fit: BoxFit.contain*/
+        );
     return WillPopScope(
       onWillPop: () async {
         return false;
@@ -421,6 +452,8 @@ class _HomescreenState extends State<Homescreen> {
           body: SingleChildScrollView(
             child: Column(
               children: [
+                // const SizedBox(height: 12),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: TextField(
@@ -445,10 +478,27 @@ class _HomescreenState extends State<Homescreen> {
                     ),
                   ),
                 ),
+
+                // buildIndicator(),
                 //CarousalSlider(),
                 const SizedBox(
-                  height: 10,
+                  height: 0,
                 ),
+                CarouselSlider.builder(
+                    carouselController: carouselController,
+                    itemCount: urlImages.length,
+                    itemBuilder: (context, index, realIndex) {
+                      final urlImage = urlImages[index];
+                      return buildImage(urlImage, index);
+                    },
+                    options: CarouselOptions(
+                        height: 230,
+                        autoPlay: true,
+                        enableInfiniteScroll: false,
+                        autoPlayAnimationDuration: const Duration(seconds: 3),
+                        enlargeCenterPage: true,
+                        onPageChanged: (index, reason) =>
+                            setState(() => activeIndex = index))),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Padding(
@@ -464,6 +514,7 @@ class _HomescreenState extends State<Homescreen> {
                     ),
                   ),
                 ),
+
                 const SizedBox(
                   height: 10,
                 ),
