@@ -156,8 +156,8 @@ class _HomescreenState extends State<Homescreen> {
     MyProvider provider = Provider.of<MyProvider>(context);
     //burger list
     provider.getBurgerCategories();
-    Burger = provider.throwburgerlist;
     // burger=provider.burgerList;
+    Burger = provider.throwburgerlist;
     //Recipe
     provider.getRecipes();
     Recipe = provider.throwrecipeList;
@@ -240,7 +240,7 @@ class _HomescreenState extends State<Homescreen> {
                           color: Color(0xff2b2b2b),
                         ),
                       ),
-                      
+
                       ListTile(
                         onTap: () {
                           Navigator.pop(context);
