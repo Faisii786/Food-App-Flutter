@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/models/food_model.dart';
 import 'package:food_app/provider/my_provider.dart';
-import 'package:food_app/slider.dart/carousal_slider.dart';
+import 'package:food_app/slider/carousal_slider.dart';
 import 'package:food_app/screens/categories_details.dart';
 import 'package:food_app/screens/detail_screen.dart';
 import 'package:food_app/credentials/login_screen.dart';

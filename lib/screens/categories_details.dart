@@ -1,9 +1,6 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:food_app/screens/detail_screen.dart';
 import 'package:food_app/screens/home.dart';
-
 import '../models/food_categories_model.dart';
 import '../widgets/my_container.dart';
 
@@ -30,29 +27,32 @@ class CategoriesDetails extends StatelessWidget {
               )),
         ),
         backgroundColor: const Color(0xff2b2b2b),
-        body: GridView.count(
-          crossAxisCount: 2,
-          childAspectRatio: 0.8,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20,
-          shrinkWrap: false,
-          primary: false,
-          children: list
-              .map((e) => MyContainer(
-                  ontap: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DetailScreen(
-                                  image: e.image,
-                                  name: e.name,
-                                  price: e.price,
-                                )));
-                  },
-                  image: e.image,
-                  price: e.price,
-                  name: e.name))
-              .toList(),
+        body: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: GridView.count(
+            crossAxisCount: 2,
+            childAspectRatio: 0.8,
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 20,
+            shrinkWrap: false,
+            primary: false,
+            children: list
+                .map((e) => MyContainer(
+                    ontap: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetailScreen(
+                                    image: e.image,
+                                    name: e.name,
+                                    price: e.price,
+                                  )));
+                    },
+                    image: e.image,
+                    price: e.price,
+                    name: e.name))
+                .toList(),
+          ),
         ),
       ),
     );

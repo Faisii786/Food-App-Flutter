@@ -23,28 +23,26 @@ class _CarousalSliderState extends State<CarousalSlider> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            CarouselSlider.builder(
-                carouselController: controller,
-                itemCount: urlImages.length,
-                itemBuilder: (context, index, realIndex) {
-                  final urlImage = urlImages[index];
-                  return buildImage(urlImage, index);
-                },
-                options: CarouselOptions(
-                    height: 250,
-                    autoPlay: true,
-                    enableInfiniteScroll: false,
-                    autoPlayAnimationDuration: const Duration(seconds: 3),
-                    enlargeCenterPage: true,
-                    onPageChanged: (index, reason) =>
-                        setState(() => activeIndex = index))),
-            const SizedBox(height: 12),
-            buildIndicator()
-          ],
-        ),
+      body: Column(
+        children: [
+          CarouselSlider.builder(
+              carouselController: controller,
+              itemCount: urlImages.length,
+              itemBuilder: (context, index, realIndex) {
+                final urlImage = urlImages[index];
+                return buildImage(urlImage, index);
+              },
+              options: CarouselOptions(
+                  // /height: 250,
+                  autoPlay: true,
+                  enableInfiniteScroll: false,
+                  autoPlayAnimationDuration: const Duration(seconds: 3),
+                  enlargeCenterPage: true,
+                  onPageChanged: (index, reason) =>
+                      setState(() => activeIndex = index))),
+         // const SizedBox(height: 12),
+          buildIndicator()
+        ],
       ),
     );
   }
@@ -61,4 +59,4 @@ class _CarousalSliderState extends State<CarousalSlider> {
 }
 
 Widget buildImage(String urlImage, int index) =>
-    Image.network(urlImage, fit: BoxFit.contain);
+    Image.network(urlImage, /*fit: BoxFit.contain*/);
