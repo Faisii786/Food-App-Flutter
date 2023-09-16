@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/models/food_model.dart';
@@ -155,8 +156,8 @@ class _HomescreenState extends State<Homescreen> {
     MyProvider provider = Provider.of<MyProvider>(context);
     //burger list
     provider.getBurgerCategories();
-    // burger=provider.burgerList;
     Burger = provider.throwburgerlist;
+    // burger=provider.burgerList;
     //Recipe
     provider.getRecipes();
     Recipe = provider.throwrecipeList;
@@ -196,6 +197,17 @@ class _HomescreenState extends State<Homescreen> {
     provider.getKarahiCategoriesList();
     karahiCategories = provider.throwKarahiCatList;
     GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
+
+    Future<Map<String,dynamic>>_getUserData()async{
+      final user=auth.currentUser;
+      if(user!=null){
+        final UserDoc=await FirebaseFirestore.instance.collection('userData').doc(user.uid).get();
+        print('user data from firstore:${UserDoc.data()}');
+        return UserDoc.data() as Map<String, dynamic>;
+      }
+      return {};
+
+    }
     return WillPopScope(
       onWillPop: () async {
         return false;
@@ -203,117 +215,222 @@ class _HomescreenState extends State<Homescreen> {
       child: Scaffold(
           backgroundColor: const Color(0xff2b2b2b),
           drawer: Drawer(
-            child: Container(
-              color: const Color(0xff2b2b2b),
-              child: Column(
-                children: [
-                  const DrawerHeader(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image(
-                            width: 50,
-                            color: Colors.white,
-                            image: AssetImage(
-                              'assets/images/food.png',
-                            )),
-                        SizedBox(
-                          height: 10,
+            backgroundColor: const Color(0xff2b2b2b),
+            child: FutureBuilder<Map<String, dynamic>>(
+              future: _getUserData(),
+              builder: (context ,snapshot){
+                if(snapshot.hasError){
+                  return Text('Error');
+                }
+                else if(!snapshot.hasData ||snapshot.data==null){
+                  return Center(child:CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 3,
+                  ));
+                }
+                else{
+                  final userData=snapshot.data;
+                  return Column(
+                    children: [
+                      UserAccountsDrawerHeader(
+                          accountName: Text(userData?['firstName']??'Unknown',style: TextStyle(color: Colors.white,fontSize: 20),),
+                          accountEmail: Text(userData?['email']??'no email',style: TextStyle(color: Colors.white,fontSize: 15),),
+                          currentAccountPicture: Image.asset('assets/images/food.png'),
+                        decoration: BoxDecoration(
+                          color: Color(0xff2b2b2b),
                         ),
-                        Text(
-                          'Faisal Aslam',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
+                      ),
+                      
+                      ListTile(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        leading: const Icon(
+                          Icons.home,
+                          color: Colors.white,
                         ),
-                        Text(
-                          'Faisalaslam218@gmail.com',
-                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        title: const Text(
+                          "Home",
+                          style: TextStyle(color: Colors.white),
                         ),
-                      ],
-                    ),
-                  ),
-                  ListTile(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    leading: const Icon(
-                      Icons.home,
-                      color: Colors.white,
-                    ),
-                    title: const Text(
-                      "Home",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  const Divider(
-                    height: 10,
-                  ),
-                  const ListTile(
-                    leading: Icon(
-                      Icons.person,
-                      color: Colors.white,
-                    ),
-                    title: Text(
-                      "Profile",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  const Divider(
-                    height: 10,
-                  ),
-                  const ListTile(
-                    leading: Icon(
-                      Icons.shop_2,
-                      color: Colors.white,
-                    ),
-                    title: Text(
-                      "Order",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  const Divider(
-                    height: 10,
-                  ),
-                  ListTile(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CarousalSlider()));
-                    },
-                    leading: const Icon(
-                      Icons.shopping_cart,
-                      color: Colors.white,
-                    ),
-                    title: const Text(
-                      "Cart",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  const Divider(
-                    height: 10,
-                  ),
-                  ListTile(
-                    onTap: () {
-                      alertlogoutbox();
-                      // auth.signOut().then((value) => Navigator.of(context).push(
-                      //     MaterialPageRoute(
-                      //         builder: (context) => const LoginScreen())));
-                    },
-                    leading: const Icon(
-                      Icons.logout,
-                      color: Colors.white,
-                    ),
-                    title: const Text(
-                      "Logout",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
+                      ),
+                      const Divider(
+                        height: 10,
+                      ),
+                      const ListTile(
+                        leading: Icon(
+                          Icons.person,
+                          color: Colors.white,
+                        ),
+                        title: Text(
+                          "Profile",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      const Divider(
+                        height: 10,
+                      ),
+                      const ListTile(
+                        leading: Icon(
+                          Icons.shop_2,
+                          color: Colors.white,
+                        ),
+                        title: Text(
+                          "Order",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      const Divider(
+                        height: 10,
+                      ),
+                      ListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CarousalSlider()));
+                        },
+                        leading: const Icon(
+                          Icons.shopping_cart,
+                          color: Colors.white,
+                        ),
+                        title: const Text(
+                          "Cart",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      const Divider(
+                        height: 10,
+                      ),
+                      ListTile(
+                        onTap: () {
+                          alertlogoutbox();
+                          // auth.signOut().then((value) => Navigator.of(context).push(
+                          //     MaterialPageRoute(
+                          //         builder: (context) => const LoginScreen())));
+                        },
+                        leading: const Icon(
+                          Icons.logout,
+                          color: Colors.white,
+                        ),
+                        title: const Text(
+                          "Logout",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  );
+                }
+              },
             ),
+            // child: Column(
+            //   children: [
+            //     const DrawerHeader(
+            //       child: Column(
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           Image(
+            //               width: 50,
+            //               color: Colors.white,
+            //               image: AssetImage(
+            //                 'assets/images/food.png',
+            //               )),
+            //           SizedBox(
+            //             height: 10,
+            //           ),
+            //           Text(
+            //             'Faisal Aslam',
+            //             style: TextStyle(
+            //               color: Colors.white,
+            //               fontSize: 15,
+            //             ),
+            //           ),
+            //           Text(
+            //             'Faisalaslam218@gmail.com',
+            //             style: TextStyle(color: Colors.white, fontSize: 15),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     ListTile(
+            //       onTap: () {
+            //         Navigator.pop(context);
+            //       },
+            //       leading: const Icon(
+            //         Icons.home,
+            //         color: Colors.white,
+            //       ),
+            //       title: const Text(
+            //         "Home",
+            //         style: TextStyle(color: Colors.white),
+            //       ),
+            //     ),
+            //     const Divider(
+            //       height: 10,
+            //     ),
+            //     const ListTile(
+            //       leading: Icon(
+            //         Icons.person,
+            //         color: Colors.white,
+            //       ),
+            //       title: Text(
+            //         "Profile",
+            //         style: TextStyle(color: Colors.white),
+            //       ),
+            //     ),
+            //     const Divider(
+            //       height: 10,
+            //     ),
+            //     const ListTile(
+            //       leading: Icon(
+            //         Icons.shop_2,
+            //         color: Colors.white,
+            //       ),
+            //       title: Text(
+            //         "Order",
+            //         style: TextStyle(color: Colors.white),
+            //       ),
+            //     ),
+            //     const Divider(
+            //       height: 10,
+            //     ),
+            //     ListTile(
+            //       onTap: () {
+            //         Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //                 builder: (context) => CarousalSlider()));
+            //       },
+            //       leading: const Icon(
+            //         Icons.shopping_cart,
+            //         color: Colors.white,
+            //       ),
+            //       title: const Text(
+            //         "Cart",
+            //         style: TextStyle(color: Colors.white),
+            //       ),
+            //     ),
+            //     const Divider(
+            //       height: 10,
+            //     ),
+            //     ListTile(
+            //       onTap: () {
+            //         alertlogoutbox();
+            //         // auth.signOut().then((value) => Navigator.of(context).push(
+            //         //     MaterialPageRoute(
+            //         //         builder: (context) => const LoginScreen())));
+            //       },
+            //       leading: const Icon(
+            //         Icons.logout,
+            //         color: Colors.white,
+            //       ),
+            //       title: const Text(
+            //         "Logout",
+            //         style: TextStyle(color: Colors.white),
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ),
           appBar: AppBar(
             title: const Text(

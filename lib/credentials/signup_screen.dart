@@ -93,6 +93,8 @@ class _SignupScreenState extends State<SignupScreen> {
         'email': emailController.text,
         'userid': userCredential.user?.uid,
         'password': passwordController.text,
+      }).then((value) {
+        showSnackbar('Account created Sucessfully please login');
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak password') {
