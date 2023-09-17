@@ -52,12 +52,21 @@ class _SignupScreenState extends State<SignupScreen> {
       showSnackbar('Email is empty');
       return;
     } else if (!reg.hasMatch(emailController.text)) {
-      showSnackbar('please enter a valid email');
+      showSnackbar('Please enter a valid email');
       return;
     }
     if (passwordController.text.trim().isEmpty ||
         lastName.text.trim() == null) {
-      showSnackbar('password is empty');
+      showSnackbar('Password is empty');
+      return;
+    }
+    if (passwordController.text.length < 6) {
+      showSnackbar("Password must at least 6 Characters");
+    } else if (!RegExp(
+            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]+$')
+        .hasMatch(passwordController.text)) {
+      showSnackbar(
+          "Password must contain at least one lowercase letter, one uppercase letter, and one special character");
       return;
     } else {
       setState(() {
@@ -173,34 +182,31 @@ class _SignupScreenState extends State<SignupScreen> {
                                 height: 20,
                               ),
                               MyTextField(
-                                prefixIcon: Icon(Icons.person),
+                                  prefixIcon: const Icon(Icons.person),
                                   obsecureText: false,
-                                  hintText: 'enter your last name',
+                                  hintText: 'Enter your last name',
                                   controller: lastName),
                               const SizedBox(
                                 height: 20,
                               ),
                               MyTextField(
-                                prefixIcon: Icon(Icons.person),
+                                prefixIcon: const Icon(Icons.person),
                                 controller: emailController,
                                 obsecureText: false,
-                                hintText: 'enter your email',
+                                hintText: 'Enter your email',
                               ),
-
                               const SizedBox(
                                 height: 20,
                               ),
                               MyTextField(
-                                prefixIcon: Icon(Icons.person),
+                                prefixIcon: const Icon(Icons.person),
                                 hintText: 'Enter your password',
                                 controller: passwordController,
                                 obsecureText: true,
                               ),
-
                               const SizedBox(
                                 height: 35,
                               ),
-                              
                               Column(
                                 children: [
                                   RoundButton(

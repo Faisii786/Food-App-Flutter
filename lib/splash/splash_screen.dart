@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       //backgroundColor: const Color(0xff3a3e3e),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(colors: [
             Color(0xff3a3e3e),
             Color.fromARGB(255, 22, 22, 22),

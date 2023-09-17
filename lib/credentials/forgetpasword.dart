@@ -23,7 +23,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
   bool loading = false;
 
-  Future ResetPassword() async {
+  Future resetPassword() async {
     if (emailController.text.trim().isEmpty) {
       showSnackbar('email is empty');
       return;
@@ -125,7 +125,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   RoundButton(
                       loading: loading,
                       ontap: () {
-                        ResetPassword();
+                        resetPassword();
                       },
                       title: 'Forget Password'),
                 ],

@@ -4,6 +4,8 @@ import '../order/order.dart';
 import '../provider/my_provider.dart';
 
 class CartPage extends StatelessWidget {
+  const CartPage({super.key});
+
   Widget cartItem({
     required String image,
     required String name,
@@ -12,14 +14,14 @@ class CartPage extends StatelessWidget {
     required int quantity,
   }) {
     return Container(
-      margin: EdgeInsets.only(bottom: 20),
+      margin: const EdgeInsets.only(bottom: 20),
       child: Row(
         children: [
           Padding(
             padding: const EdgeInsets.only(
               left: 10,
             ),
-            child: Container(
+            child: SizedBox(
               width: 160,
               height: 160,
               child: CircleAvatar(
@@ -27,49 +29,47 @@ class CartPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 20,
           ),
           Expanded(
               child: Stack(
             alignment: Alignment.topRight,
             children: [
-              Container(
-                child: Column(
-                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      name,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    // Text(
-                    //   "burger bhout acha hain",
-                    //   style: TextStyle(color: Colors.white),
-                    // ),
-                    Text(
-                      "Price \$ $price",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Quantity $quantity',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        )
-                      ],
-                    )
-                  ],
-                ),
+              Column(
+                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  // Text(
+                  //   "burger bhout acha hain",
+                  //   style: TextStyle(color: Colors.white),
+                  // ),
+                  Text(
+                    "Price \$ $price",
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Quantity $quantity',
+                        style: const TextStyle(fontSize: 20, color: Colors.white),
+                      )
+                    ],
+                  )
+                ],
               ),
               IconButton(
-                icon: Icon(Icons.delete, color: Colors.white),
+                icon: const Icon(Icons.delete, color: Colors.white),
                 onPressed: onTap,
               )
             ],
@@ -79,30 +79,31 @@ class CartPage extends StatelessWidget {
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     MyProvider provider = Provider.of<MyProvider>(context);
     int total = provider.totalprice();
     return Scaffold(
-      backgroundColor: Color(0xff3a3e3e),
+      backgroundColor: const Color(0xff3a3e3e),
       bottomNavigationBar: Container(
-        margin: EdgeInsets.only(bottom: 20, left: 20, right: 20),
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         height: 65,
         decoration: BoxDecoration(
-            color: Color(0xff3a3e3e), borderRadius: BorderRadius.circular(10)),
+            color: const Color(0xff3a3e3e), borderRadius: BorderRadius.circular(10)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               "\$ $total",
-              style: TextStyle(color: Colors.white, fontSize: 30),
+              style: const TextStyle(color: Colors.white, fontSize: 30),
             ),
             TextButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => PlaceOrder()));
+                      MaterialPageRoute(builder: (context) => const PlaceOrder()));
                 },
-                child: Text(
+                child: const Text(
                   "Buy Now",
                   style: TextStyle(
                       color: Colors.white,
@@ -113,7 +114,7 @@ class CartPage extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: const Color(0xff3a3e3e),
       ),
       body: ListView.builder(

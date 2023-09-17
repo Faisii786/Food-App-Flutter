@@ -48,8 +48,8 @@ class _HomescreenState extends State<Homescreen> {
   // void animateToSlide(int index) => carouselController.animateToPage(index);
 
   final auth = FirebaseAuth.instance;
-  List<CategoriesModel> Burger = [];
-  List<CategoriesModel> Recipe = [];
+  List<CategoriesModel> burger = [];
+  List<CategoriesModel> recipe = [];
   List<CategoriesModel> bbq = [];
   List<CategoriesModel> biryanil = [];
   List<CategoriesModel> karahi = [];
@@ -65,7 +65,7 @@ class _HomescreenState extends State<Homescreen> {
 
   Widget recipes() {
     return Row(
-      children: Recipe.map((e) => Categories(
+      children: recipe.map((e) => Categories(
           ontap: () {
             Navigator.pushReplacement(
                 context,
@@ -78,9 +78,9 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 
-  Widget Burgers() {
+  Widget burgers() {
     return Row(
-        children: Burger.map((e) => Categories(
+        children: burger.map((e) => Categories(
             ontap: () {
               Navigator.pushReplacement(
                 context,
@@ -95,7 +95,7 @@ class _HomescreenState extends State<Homescreen> {
             name: e.name)).toList());
   }
 
-  Widget BBQS() {
+  Widget bBQS() {
     return Row(
       children: bbq
           .map((e) => Categories(
@@ -112,7 +112,7 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 
-  Widget Biryani() {
+  Widget biryani() {
     return Row(
       children: biryanil
           .map((e) => Categories(
@@ -129,7 +129,7 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 
-  Widget Chicken() {
+  Widget chicken() {
     return Row(
       children: karahi
           .map((e) => Categories(
@@ -199,10 +199,10 @@ class _HomescreenState extends State<Homescreen> {
     //burger list
     provider.getBurgerCategories();
     // burger=provider.burgerList;
-    Burger = provider.throwburgerlist;
+    burger = provider.throwburgerlist;
     //Recipe
     provider.getRecipes();
-    Recipe = provider.throwrecipeList;
+    recipe = provider.throwrecipeList;
     // recipe=provider.recipeList;
     //bbq
     provider.getbbqCategories();
@@ -243,12 +243,11 @@ class _HomescreenState extends State<Homescreen> {
     Future<Map<String, dynamic>> _getUserData() async {
       final user = auth.currentUser;
       if (user != null) {
-        final UserDoc = await FirebaseFirestore.instance
+        final userDoc = await FirebaseFirestore.instance
             .collection('userData')
             .doc(user.uid)
             .get();
-        print('user data from firstore:${UserDoc.data()}');
-        return UserDoc.data() as Map<String, dynamic>;
+        return userDoc.data() as Map<String, dynamic>;
       }
       return {};
     }
@@ -268,9 +267,9 @@ class _HomescreenState extends State<Homescreen> {
               future: _getUserData(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
-                  return Text('Error');
+                  return const Text('Error');
                 } else if (!snapshot.hasData || snapshot.data == null) {
-                  return Center(
+                  return const Center(
                       child: CircularProgressIndicator(
                     color: Colors.white,
                     strokeWidth: 3,
@@ -282,17 +281,17 @@ class _HomescreenState extends State<Homescreen> {
                       UserAccountsDrawerHeader(
                         accountName: Text(
                           userData?['firstName'] ?? 'Unknown',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          style: const TextStyle(color: Colors.white, fontSize: 20),
                         ),
                         accountEmail: Text(
                           userData?['email'] ?? 'no email',
-                          style: TextStyle(color: Colors.white, fontSize: 15),
+                          style: const TextStyle(color: Colors.white, fontSize: 15),
                         ),
                         currentAccountPicture: Image.asset(
                           'assets/images/food.png',
                           color: Colors.white,
                         ),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0xff2b2b2b),
                         ),
                       ),
@@ -343,7 +342,7 @@ class _HomescreenState extends State<Homescreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => CartPage()));
+                                  builder: (context) => const CartPage()));
                           // provider.addToCart(
                           //     image: widget.image,
                           //     quantity: quantity,
@@ -386,7 +385,7 @@ class _HomescreenState extends State<Homescreen> {
           ),
           appBar: AppBar(
             title: const Text(
-              'Food App',
+              'Food Zone',
               style: TextStyle(color: Colors.white, fontSize: 17),
             ),
             centerTitle: true,
@@ -396,20 +395,20 @@ class _HomescreenState extends State<Homescreen> {
             actions: [
               PopupMenuButton(
                   color: const Color.fromARGB(255, 20, 1, 53),
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.more_vert,
                     color: Colors.white,
                   ),
                   itemBuilder: (context) {
                     return [
-                      PopupMenuItem(
+                      const PopupMenuItem(
                         value: 0,
                         child: Text(
                           "My Account",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
-                      PopupMenuItem(
+                      const PopupMenuItem(
                         value: 1,
                         child: Text(
                           "Settings",
@@ -422,7 +421,7 @@ class _HomescreenState extends State<Homescreen> {
                             onTap: () {
                               alertlogoutbox();
                             },
-                            child: Text(
+                            child: const Text(
                               "Logout",
                               style: TextStyle(color: Colors.white),
                             )),
@@ -505,11 +504,11 @@ class _HomescreenState extends State<Homescreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
                       children: [
-                        Burgers(),
+                        burgers(),
                         recipes(),
-                        BBQS(),
-                        Biryani(),
-                        Chicken(),
+                        bBQS(),
+                        biryani(),
+                        chicken(),
                       ],
                     ),
                   ),

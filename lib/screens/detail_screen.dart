@@ -31,7 +31,7 @@ class _DetailScreenState extends State<DetailScreen> {
         leading: IconButton(
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Homescreen()));
+                MaterialPageRoute(builder: (context) => const Homescreen()));
           },
           icon: const Icon(
             Icons.arrow_back,
@@ -42,13 +42,11 @@ class _DetailScreenState extends State<DetailScreen> {
       body: Column(
         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Container(
-            child: Image(
-              width: 300,
-              image: NetworkImage(widget.image),
-            ),
+          Image(
+            width: 300,
+            image: NetworkImage(widget.image),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Expanded(
@@ -68,14 +66,14 @@ class _DetailScreenState extends State<DetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
                     widget.name,
                     style: const TextStyle(color: Colors.white, fontSize: 25),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
@@ -137,7 +135,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   const Text(
@@ -156,7 +154,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => CartPage()));
+                                builder: (context) => const CartPage()));
                         provider.addToCart(
                             image: widget.image,
                             quantity: quantity,

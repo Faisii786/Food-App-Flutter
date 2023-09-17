@@ -31,15 +31,24 @@ class _LoginScreenState extends State<LoginScreen> {
       GlobalKey<ScaffoldMessengerState>();
   void validation1() {
     if (emailController.text.trim().isEmpty || emailController.text == null) {
-      showSnackbar('email is empty');
+      showSnackbar('Email is empty');
       return;
     }
     if (passwordController.text.trim().isEmpty ||
         passwordController.text == null) {
-      showSnackbar('password  is empty');
+      showSnackbar('Password  is empty');
       return;
     } else if (!reg.hasMatch(emailController.text)) {
       showSnackbar('Please enter valid email');
+      return;
+    }
+    if (passwordController.text.length < 6) {
+      showSnackbar("Password must at least 6 Characters");
+    } else if (!RegExp(
+            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]+$')
+        .hasMatch(passwordController.text)) {
+      showSnackbar(
+          "Password must contain at least one lowercase letter, one uppercase letter, and one special character");
       return;
     } else {
       setState(() {
@@ -63,13 +72,13 @@ class _LoginScreenState extends State<LoginScreen> {
       passwordController.clear();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        showSnackbar('user not found');
+        showSnackbar('User not found');
         setState(() {
           loading = false;
         });
         return;
       } else if (e.code == 'wrong-password') {
-        showSnackbar('password is incorrext');
+        showSnackbar('Password is incorrext');
         setState(() {
           loading = false;
         });
@@ -147,7 +156,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(
                             height: 60,
                           ),
-                      
                           Column(
                             children: [
                               MyTextField(
