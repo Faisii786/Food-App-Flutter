@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/screens/detail_screen.dart';
 import 'package:food_app/screens/home.dart';
-import '../models/food_categories_model.dart';
+import '../models/sub_categories_model.dart';
 import '../widgets/my_container.dart';
 
 class CategoriesDetails extends StatelessWidget {

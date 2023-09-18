@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../models/cart_model.dart';
 import '../models/categories_model.dart';
-import '../models/food_categories_model.dart';
+import '../models/sub_categories_model.dart';
 import '../models/food_model.dart';
 
 class MyProvider extends ChangeNotifier {

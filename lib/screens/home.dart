@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/models/food_model.dart';
-import 'package:food_app/provider/my_provider.dart';
+import 'package:food_app/fetch%20data/my_provider.dart';
 import 'package:food_app/screens/categories_details.dart';
 import 'package:food_app/screens/detail_screen.dart';
 import 'package:food_app/credentials/login_screen.dart';
@@ -11,7 +11,7 @@ import 'package:food_app/widgets/Categories.dart';
 import 'package:food_app/widgets/my_container.dart';
 import 'package:provider/provider.dart';
 import '../models/categories_model.dart';
-import '../models/food_categories_model.dart';
+import '../models/sub_categories_model.dart';
 // import '../slider/carousal_slider.dart';
 import 'cart.dart';
 // import 'package:carousel_slider/carousel_controller.dart';
@@ -24,7 +24,6 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
-
   // for carousal slider
   final urlImages = [
     'https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
@@ -65,34 +64,38 @@ class _HomescreenState extends State<Homescreen> {
 
   Widget recipes() {
     return Row(
-      children: recipe.map((e) => Categories(
-          ontap: () {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        CategoriesDetails(list: recipeCategories)));
-          },
-          image: e.image,
-          name: e.name)).toList(),
+      children: recipe
+          .map((e) => Categories(
+              ontap: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            CategoriesDetails(list: recipeCategories)));
+              },
+              image: e.image,
+              name: e.name))
+          .toList(),
     );
   }
 
   Widget burgers() {
     return Row(
-        children: burger.map((e) => Categories(
-            ontap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CategoriesDetails(
-                    list: burgerCategories,
-                  ),
-                ),
-              );
-            },
-            image: e.image,
-            name: e.name)).toList());
+        children: burger
+            .map((e) => Categories(
+                ontap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CategoriesDetails(
+                        list: burgerCategories,
+                      ),
+                    ),
+                  );
+                },
+                image: e.image,
+                name: e.name))
+            .toList());
   }
 
   Widget bBQS() {
@@ -240,6 +243,7 @@ class _HomescreenState extends State<Homescreen> {
     karahiCategories = provider.throwKarahiCatList;
     GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
 
+    // get user data from firestore for drawer
     Future<Map<String, dynamic>> _getUserData() async {
       final user = auth.currentUser;
       if (user != null) {
@@ -281,11 +285,13 @@ class _HomescreenState extends State<Homescreen> {
                       UserAccountsDrawerHeader(
                         accountName: Text(
                           userData?['firstName'] ?? 'Unknown',
-                          style: const TextStyle(color: Colors.white, fontSize: 20),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 20),
                         ),
                         accountEmail: Text(
                           userData?['email'] ?? 'no email',
-                          style: const TextStyle(color: Colors.white, fontSize: 15),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 15),
                         ),
                         currentAccountPicture: Image.asset(
                           'assets/images/food.png',

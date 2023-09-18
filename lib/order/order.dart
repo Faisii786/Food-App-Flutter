@@ -121,110 +121,115 @@ class _PlaceOrderState extends State<PlaceOrder> {
   Widget build(BuildContext context) {
     return ScaffoldMessenger(
       key: globalkey,
-      child: Scaffold(
-        backgroundColor: whatsappBusinessColor,
-        body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Place order',
-                      style:
-                          GoogleFonts.aladin(color: Colors.white, fontSize: 26),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      'Enter you valid Credentials',
-                      style: GoogleFonts.aladin(
-                        color: Colors.white,
-                        fontSize: 20,
+      child: WillPopScope(
+        onWillPop: () async {
+          return false;
+        },
+        child: Scaffold(
+          backgroundColor: whatsappBusinessColor,
+          body: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back,color: Colors.white,)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Place order',
+                        style: GoogleFonts.aladin(
+                            color: Colors.white, fontSize: 26),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 30),
-              Expanded(
-                  child: Container(
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 40,
+                      const SizedBox(height: 5),
+                      Text(
+                        'Enter you valid Credentials',
+                        style: GoogleFonts.aladin(
+                          color: Colors.white,
+                          fontSize: 20,
                         ),
-                        Column(
-                          children: [
-                            MyTextField(
-                              hintText: 'Enter your name',
-                              controller: namecontroller,
-                              obsecureText: false,
-                              prefixIcon: const Icon(Icons.person),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            MyTextField(
-                              hintText: 'Enter phone num',
-                              controller: phonecontroller,
-                              obsecureText: false,
-                              prefixIcon: const Icon(Icons.call),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            MyTextField(
-                              prefixIcon: const Icon(Icons.location_city),
-                              hintText: 'Enter your City',
-                              controller: citycontroller,
-                              obsecureText: false,
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            MyTextField(
-                              prefixIcon: const Icon(Icons.location_city),
-                              hintText: 'Enter full Adress',
-                              controller: adresscontroller,
-                              obsecureText: false,
-                            ),
-                            // const SizedBox(
-                            //   height: 20,
-                            // ),
-                            // MyTextField(
-                            //   prefixIcon: const Icon(Icons.email),
-                            //   hintText: 'Enter your Email',
-                            //   controller: emailController,
-                            //   obsecureText: false,
-                            // ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            RoundButton(
-                              title: 'Buy Now',
-                              loading: loading,
-                              ontap: () {
-                                validation1();
-                              },
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-              ))
-            ],
+                const SizedBox(height: 30),
+                Expanded(
+                    child: Container(
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            height: 40,
+                          ),
+                          Column(
+                            children: [
+                              MyTextField(
+                                hintText: 'Enter your name',
+                                controller: namecontroller,
+                                obsecureText: false,
+                                prefixIcon: const Icon(Icons.person),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              MyTextField(
+                                hintText: 'Enter phone num',
+                                controller: phonecontroller,
+                                obsecureText: false,
+                                prefixIcon: const Icon(Icons.call),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              MyTextField(
+                                prefixIcon: const Icon(Icons.location_city),
+                                hintText: 'Enter your City',
+                                controller: citycontroller,
+                                obsecureText: false,
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              MyTextField(
+                                prefixIcon: const Icon(Icons.location_city),
+                                hintText: 'Enter full Adress',
+                                controller: adresscontroller,
+                                obsecureText: false,
+                              ),
+                              // const SizedBox(
+                              //   height: 20,
+                              // ),
+                              // MyTextField(
+                              //   prefixIcon: const Icon(Icons.email),
+                              //   hintText: 'Enter your Email',
+                              //   controller: emailController,
+                              //   obsecureText: false,
+                              // ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              RoundButton(
+                                title: 'Buy Now',
+                                loading: loading,
+                                ontap: () {
+                                  validation1();
+                                },
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ))
+              ],
+            ),
           ),
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:food_app/provider/my_provider.dart';
+import 'package:food_app/fetch%20data/my_provider.dart';
 import 'package:food_app/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
