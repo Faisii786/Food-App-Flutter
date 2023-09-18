@@ -237,14 +237,14 @@ class _HomescreenState extends State<Homescreen> {
     ///biryani categories List///
     provider.getBiryaniCategoriesList();
     biryaniCategories = provider.throwBiryaniCatList;
-
+    
     ///karahi Categories///
     provider.getKarahiCategoriesList();
     karahiCategories = provider.throwKarahiCatList;
-    GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
+    //GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
 
     // get user data from firestore for drawer
-    Future<Map<String, dynamic>> _getUserData() async {
+    Future<Map<String, dynamic>> getUserData() async {
       final user = auth.currentUser;
       if (user != null) {
         final userDoc = await FirebaseFirestore.instance
@@ -268,7 +268,7 @@ class _HomescreenState extends State<Homescreen> {
           drawer: Drawer(
             backgroundColor: const Color(0xff2b2b2b),
             child: FutureBuilder<Map<String, dynamic>>(
-              future: _getUserData(),
+              future: getUserData(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return const Text('Error');

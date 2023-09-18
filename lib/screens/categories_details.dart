@@ -4,6 +4,7 @@ import 'package:food_app/screens/home.dart';
 import '../models/sub_categories_model.dart';
 import '../widgets/my_container.dart';
 
+// ignore: must_be_immutable
 class CategoriesDetails extends StatelessWidget {
   List<FoodCategoriesModel> list = [];
   CategoriesDetails({Key? key, required this.list}) : super(key: key);
